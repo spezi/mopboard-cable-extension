@@ -1,55 +1,60 @@
 <template>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
 
-  <!-- Introduction -->
-  <section id="intro" class="main">
-    <div class="spotlight">
-      <div class="content">
-          <!--
-          <div class="spotlight" v-if="radio">
-									<div class="content">
-										<header class="major">
-											<h1>Musi iss grad</h1>
-										</header>
-										<h2> {{artist}}  {{song}} </h2>
-									</div>
-									<span class="image"><img :src="songart" alt="" /></span>
-					</div>
-            -->
-
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
       </div>
-    </div>
-    
-  </section>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <Calculator/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-//import axios from 'axios'
+import Calculator from './components/Calculator';
 
 export default {
-  name: 'app',
-  data () {
-    return {
+  name: 'App',
 
-    }
+  components: {
+    Calculator,
   },
-  computed:{
-  
-  },
-  methods: {
 
-  }
-}
+  data: () => ({
+    //
+  }),
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-
-</style>
