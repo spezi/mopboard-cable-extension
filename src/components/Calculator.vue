@@ -314,7 +314,7 @@
         1:0,
         2:0,
         3:-5,
-        4:-50
+        4:-10
       }
       if(this.fl) {
         return Number(this.fl) + Number(options[this.selected])
@@ -332,7 +332,7 @@
     back: function () {
       let options = {
         1:-35,
-        2:-10,
+        2:-50,
         3:0,
         4:0
       }
@@ -375,13 +375,13 @@
     length: function () {
       // `this` points to the vm instance
       if(this.selected == 1 && this.bl && this.sbll) {
-        return Number(this.bl) + -5 + Number(this.flex) + this.tobackleft;
+        return Number(this.bl) + -35 + Number(this.flex) + this.tobackleft;
       } 
       else if (this.selected == 2 && this.sbll && this.bl && this.sbrl) {
         return Number(this.bl) + -50 + Number(this.flex) + this.tobackleft + Number(this.flex) + this.tobackright;
       }
       else if (this.selected == 3 && this.sfll && this.fl) {
-        return Number(this.fl) + -35 + Number(this.flex) + this.tofrontleft;
+        return Number(this.fl) + -5 + Number(this.flex) + this.tofrontleft;
       }
       else if (this.selected == 4 && this.sfll && this.fl && this.sfrl) {
         return Number(this.fl) + -10 + Number(this.flex) + this.tofrontleft + Number(this.flex) + this.tofrontright;
