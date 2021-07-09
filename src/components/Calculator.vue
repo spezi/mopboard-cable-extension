@@ -207,8 +207,78 @@
         class="mb-5"
         cols="6"
       >
+ <a v-if="length" :href='svgcontent' download="test.svg">download svg</a>
+        <svg
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:cc="http://creativecommons.org/ns#"
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:svg="http://www.w3.org/2000/svg"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+            xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+            width="51mm"
+            height="400mm"
+            viewBox="0 0 51 400"
+            version="1.1"
+            id="svg1245">
+            <defs
+              id="defs1239" />
+            <metadata
+              id="metadata1242">
+              <rdf:RDF>
+                <cc:Work
+                  rdf:about="">
+                  <dc:format>image/svg+xml</dc:format>
+                  <dc:type
+                    rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                  <dc:title></dc:title>
+                </cc:Work>
+              </rdf:RDF>
+            </metadata>
+            <g
+              inkscape:label="Layer 1"
+              inkscape:groupmode="layer"
+              id="layer1">
+              <!--
+              <path
+                id="rect1865"
+                style="opacity:0.355589;fill:#ff00ff;stroke:none;stroke-width:0.329882;stroke-linecap:round"
+                d="M 0,0 H 51 V 8 H 0 Z" />-->
+              <path
+                id="rect1862"
+                style="opacity:0.355589;fill:#00ff00;stroke:none;stroke-width:0.249173;stroke-linecap:round"
+                :d="rectlength" />
+                <!--
+              <path
+                id="rect1865-6"
+                style="opacity:0.355589;fill:#ff00ff;stroke:none;stroke-width:0.329882;stroke-linecap:round"
+                d="m 0,8 h 51 v 8 H 0 Z" />-->
+              <g
+                id="g1890">
+                <path
+                  v-if="plug"
+                  style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+                  d="m 0.29339232,5.4565217 3.13560008,-5.40649991 6.262,0.01 3.1261996,5.41209991 -3.1356996,5.4064023 3.1262996,5.4121 6.2619,0.01 3.1357,-5.4065 -3.1263,-5.4120023 3.1357,-5.40649991 6.2619,0.01 3.1263,5.41089991 -3.1357,5.4076023 3.1263,5.4121 h 6.2619 l 3.1357,-5.4049 -3.1263,-5.4121023 3.1357,-5.40639991 6.2619,0.01 3.1263,5.41209991"
+                  id="path1152-7-9"
+                  sodipodi:nodetypes="cccccccccccccccccccc" />
+                <path
+                  v-if="hole"
+                  id="path1152-7-0-3"
+                  style="fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+                  d="m 0.04324912,10.2303 c 1.17690998,2.0287 2.35417998,4.0572 3.53124998,6.0859 1.99088,0 3.98177,-0.01 5.97265,-0.01 L 12.527619,11.1441 C 11.482759,9.3419996 10.437449,7.5401 9.3928591,5.7379 10.483429,3.8505 11.573769,1.9631 12.664339,0.0758 c 2.18359,0 4.36719,-0.01 6.55078,-0.012 1.09277,1.8863 2.18653,3.772 3.2793,5.6582 -1.04239,1.804 -2.08463,3.6080996 -3.12696,5.4122 0.9974,1.7187 1.9948,3.4375 2.99219,5.1562 1.99089,0 3.98177,-0.01 5.97266,-0.01 l 2.98242,-5.1621 c -1.04551,-1.8027004 -2.09151,-3.6052 -3.13672,-5.4082 1.09053,-1.8867 2.18096,-3.7734 3.27149,-5.6601 h 6.55078 c 1.09267,1.885 2.18662,3.7693 3.27929,5.6543 -1.0418,1.8039 -2.08331,3.6080996 -3.125,5.4121 0.99675,1.7187 1.99349,3.4375 2.99024,5.1562 1.99088,0 3.98177,-0.01 5.97265,-0.01 1.17395,-2.0312 2.34663,-4.0631 3.52149,-6.0938"
+                  sodipodi:nodetypes="cccccccccccccccccccc" />
+              </g>
+              <path
+                :d="flexposition"
+                stroke="#000000"
+                stroke-width="0.2"
+                id="path1186-6-3-7-6-1-7"
+                style="fill:none;stroke-linecap:round;stroke-linejoin:round"
+                sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccc" />
+            </g>
+          </svg>
 
-    
+         
 
     </v-col>
     </v-row>
@@ -234,6 +304,8 @@
         sbrl: "",
         sfrl: "",
         flex: 19.7,
+        hole: false,
+        plug: true,
     }),
     computed: {
     // a computed getter
@@ -249,6 +321,13 @@
       } else {
         return 0
       }
+    },
+    rectlength: function () {
+        return "m 0.5,8 h 50 v " +  this.tofrontleft + " h -50 z"
+    },
+    flexposition: function() {
+      let value = Number(this.tofrontleft) + 8 
+      return "M -0.12917," + value + "H 16.133 m 3,0 H 47.6 m 3.52917,1.5 H 34.867 m -3,0 H 3.4 m -3.52917,1.5 H 16.133 m 3,0 H 47.6 m 3.52917,1.5 H 34.867 m -3,0 H 3.4 m -3.52917,1.5 H 16.133 m 3,0 H 47.6 m 3.52917,1.5 H 34.867 m -3,0 H 3.4 m -3.52917,1.5 H 16.133 m 3,0 H 47.6 m 3.52917,1.5 H 34.867 m -3,0 H 3.4 m -3.52917,1.5 H 16.133 m 3,0 H 47.6 m 3.52917,1.5 H 34.867 m -3,0 H 3.4 m -3.52917,1.5 H 16.133 m 3,0 H 47.6 m 3.52917,1.5 H 34.867 m -3,0 H 3.4 m -3.52917,1.5 H 16.133 m 3,0 H 47.6 m 3.52917,1.5 H 34.867 m -3,0 H 3.4"
     },
     back: function () {
       let options = {
@@ -302,7 +381,7 @@
         return Number(this.bl) + -50 + Number(this.flex) + this.tobackleft + Number(this.flex) + this.tobackright;
       }
       else if (this.selected == 3 && this.sfll && this.fl) {
-        return Number(this.fl) + -35 + Number(this.flex) + ((Number(this.sfll) - 30)/2 + 8);
+        return Number(this.fl) + -35 + Number(this.flex) + this.tofrontleft;
       }
       else if (this.selected == 4 && this.sfll && this.fl && this.sfrl) {
         return Number(this.fl) + -10 + Number(this.flex) + this.tofrontleft + Number(this.flex) + this.tofrontright;
@@ -310,6 +389,16 @@
       else {
         return 0;
       }
+    },
+    svgcontent: function() {
+      let svg = document.getElementById("svg1245");
+      //let svg = ""
+      if (svg) {
+        return "data:image/svg+xml;utf8," + svg.outerHTML
+      } else {
+        return false
+      }
+      
     }
   },
   methods: {
