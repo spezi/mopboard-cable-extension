@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="mode == 'add'">
     <v-row class="text-center">
       <v-col
         class="mb-5"
@@ -50,7 +50,7 @@
             v-model="sfrl"
             placeholder="mm"
         ></v-text-field>
-         <v-radio-group v-model="joint" @change="EndType">
+         <v-radio-group v-model="jointleft" @change="EndType">
             <template v-slot:label>
               <div>witch end type</div>
             </template>
@@ -219,8 +219,8 @@
 
     <v-row class="text-center">
       <v-col
-        class="mb-5"
-        cols="6"
+        class="mb-2"
+        cols="2"
       >
  
         <svg
@@ -236,7 +236,9 @@
             height="400mm"
             viewBox="0 0 51 400"
             version="1.1"
-            id="svg1245">
+            id="svgleft"
+            @load="loadsvg"
+            >
             <defs
               id="defs1239" />
             <metadata
@@ -272,13 +274,13 @@
               <g
                 id="g1890">
                 <path
-                  v-if="plug"
+                  v-if="hole"
                   style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
                   d="m 0.29339232,5.4565217 3.13560008,-5.40649991 6.262,0.01 3.1261996,5.41209991 -3.1356996,5.4064023 3.1262996,5.4121 6.2619,0.01 3.1357,-5.4065 -3.1263,-5.4120023 3.1357,-5.40649991 6.2619,0.01 3.1263,5.41089991 -3.1357,5.4076023 3.1263,5.4121 h 6.2619 l 3.1357,-5.4049 -3.1263,-5.4121023 3.1357,-5.40639991 6.2619,0.01 3.1263,5.41209991"
                   id="path1152-7-9"
                   sodipodi:nodetypes="cccccccccccccccccccc" />
                 <path
-                  v-if="hole"
+                  v-if="plug"
                   id="path1152-7-0-3"
                   style="fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
                   d="m 0.04324912,10.2303 c 1.17690998,2.0287 2.35417998,4.0572 3.53124998,6.0859 1.99088,0 3.98177,-0.01 5.97265,-0.01 L 12.527619,11.1441 C 11.482759,9.3419996 10.437449,7.5401 9.3928591,5.7379 10.483429,3.8505 11.573769,1.9631 12.664339,0.0758 c 2.18359,0 4.36719,-0.01 6.55078,-0.012 1.09277,1.8863 2.18653,3.772 3.2793,5.6582 -1.04239,1.804 -2.08463,3.6080996 -3.12696,5.4122 0.9974,1.7187 1.9948,3.4375 2.99219,5.1562 1.99089,0 3.98177,-0.01 5.97266,-0.01 l 2.98242,-5.1621 c -1.04551,-1.8027004 -2.09151,-3.6052 -3.13672,-5.4082 1.09053,-1.8867 2.18096,-3.7734 3.27149,-5.6601 h 6.55078 c 1.09267,1.885 2.18662,3.7693 3.27929,5.6543 -1.0418,1.8039 -2.08331,3.6080996 -3.125,5.4121 0.99675,1.7187 1.99349,3.4375 2.99024,5.1562 1.99088,0 3.98177,-0.01 5.97265,-0.01 1.17395,-2.0312 2.34663,-4.0631 3.52149,-6.0938"
@@ -291,6 +293,28 @@
                 id="path1186-6-3-7-6-1-7"
                 style="fill:none;stroke-linecap:round;stroke-linejoin:round"
                 sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccc" />
+                <text
+                  xml:space="preserve"
+                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:Metropolis;-inkscape-font-specification:Metropolis;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+                  x="20.726938"
+                  y="33.21265"
+                  id="text1614"><tspan
+                    sodipodi:role="line"
+                    id="tspan1612"
+                    x="20.726938"
+                    y="33.21265"
+                    style="fill:#ff0000;stroke-width:0.264583">{{listNumber()}}</tspan></text>
+                <text
+                  xml:space="preserve"
+                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.58611px;line-height:1.25;font-family:Metropolis;-inkscape-font-specification:Metropolis;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+                  x="7.5821052"
+                  y="48.300053"
+                  id="text1614-3"><tspan
+                    sodipodi:role="line"
+                    x="7.5821052"
+                    y="48.300053"
+                    style="font-size:4.58611px;fill:#ff0000;stroke-width:0.264583"
+                    id="tspan1640">total length: {{length}} </tspan></text>
             </g>
           </svg>
 
@@ -307,7 +331,8 @@
             height="400mm"
             viewBox="0 0 51 400"
             version="1.1"
-            id="svg1245">
+            id="svgright"
+            @load="loadsvg">
             <defs
               id="defs1239" />
             <metadata
@@ -343,13 +368,13 @@
               <g
                 id="g1890">
                 <path
-                  v-if="!plug"
+                  v-if="!hole"
                   style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
                   d="m 0.29339232,5.4565217 3.13560008,-5.40649991 6.262,0.01 3.1261996,5.41209991 -3.1356996,5.4064023 3.1262996,5.4121 6.2619,0.01 3.1357,-5.4065 -3.1263,-5.4120023 3.1357,-5.40649991 6.2619,0.01 3.1263,5.41089991 -3.1357,5.4076023 3.1263,5.4121 h 6.2619 l 3.1357,-5.4049 -3.1263,-5.4121023 3.1357,-5.40639991 6.2619,0.01 3.1263,5.41209991"
                   id="path1152-7-9"
                   sodipodi:nodetypes="cccccccccccccccccccc" />
                 <path
-                  v-if="!hole"
+                  v-if="!plug"
                   id="path1152-7-0-3"
                   style="fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
                   d="m 0.04324912,10.2303 c 1.17690998,2.0287 2.35417998,4.0572 3.53124998,6.0859 1.99088,0 3.98177,-0.01 5.97265,-0.01 L 12.527619,11.1441 C 11.482759,9.3419996 10.437449,7.5401 9.3928591,5.7379 10.483429,3.8505 11.573769,1.9631 12.664339,0.0758 c 2.18359,0 4.36719,-0.01 6.55078,-0.012 1.09277,1.8863 2.18653,3.772 3.2793,5.6582 -1.04239,1.804 -2.08463,3.6080996 -3.12696,5.4122 0.9974,1.7187 1.9948,3.4375 2.99219,5.1562 1.99089,0 3.98177,-0.01 5.97266,-0.01 l 2.98242,-5.1621 c -1.04551,-1.8027004 -2.09151,-3.6052 -3.13672,-5.4082 1.09053,-1.8867 2.18096,-3.7734 3.27149,-5.6601 h 6.55078 c 1.09267,1.885 2.18662,3.7693 3.27929,5.6543 -1.0418,1.8039 -2.08331,3.6080996 -3.125,5.4121 0.99675,1.7187 1.99349,3.4375 2.99024,5.1562 1.99088,0 3.98177,-0.01 5.97265,-0.01 1.17395,-2.0312 2.34663,-4.0631 3.52149,-6.0938"
@@ -362,6 +387,28 @@
                 id="path1186-6-3-7-6-1-7"
                 style="fill:none;stroke-linecap:round;stroke-linejoin:round"
                 sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccc" />
+                <text
+                  xml:space="preserve"
+                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:Metropolis;-inkscape-font-specification:Metropolis;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+                  x="20.726938"
+                  y="33.21265"
+                  id="text1614"><tspan
+                    sodipodi:role="line"
+                    id="tspan1612"
+                    x="20.726938"
+                    y="33.21265"
+                    style="fill:#ff0000;stroke-width:0.264583">{{listNumber()}}</tspan></text>
+              <text
+                xml:space="preserve"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.58611px;line-height:1.25;font-family:Metropolis;-inkscape-font-specification:Metropolis;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+                x="7.5821052"
+                y="48.300053"
+                id="text1614-3"><tspan
+                  sodipodi:role="line"
+                  x="7.5821052"
+                  y="48.300053"
+                  style="font-size:4.58611px;fill:#ff0000;stroke-width:0.264583"
+                  id="tspan1640">total length: {{length}} </tspan></text>
             </g>
           </svg>
          
@@ -370,7 +417,26 @@
     <v-col  class="mb-5"
         cols="6">
       <a v-if="sfbl" :href='svgcontent' download="test.svg">download svg</a>
+      <v-btn
+        text
+        @click="addToList"
+      >
+        <span class="mr-2">add to Collection</span>
+        <v-icon>mdi-plus-box-multiple</v-icon>
+      </v-btn>
     </v-col>
+    </v-row>
+  </v-container>
+  <v-container v-else>
+    <v-row>
+        <template>
+            <v-col class="mb-2" cols="4" v-for="(item, index) in collection" :key="index">
+                <v-row>
+                    <v-col class="mb-6" cols="6" v-html="item.left"></v-col>
+                    <v-col v-if="item.right" class="mb-6" cols="6" v-html="item.right">></v-col>
+                </v-row>
+            </v-col>
+        </template>
     </v-row>
   </v-container>
 </template>
@@ -396,12 +462,20 @@
         flex: 19.7,
         hole: false,
         plug: true,
-        joint: "plug"
+        jointleft: "plug",
+        mode: "add",
+        collection: [],
     }),
     computed: {
     // a computed getter
+    jointright: function() {
+      if(this.jointleft == "plug") {
+        return "hole";
+      } else {
+        return "plug";
+      }
+    },
     sfbl: function() {
-
       if(this.tofrontleft) {
         return this.tofrontleft 
       } else if (this.tobackleft) {
@@ -523,7 +597,7 @@
       }
     },
     svgcontent: function() {
-      let svg = document.getElementById("svg1245");
+      let svg = document.getElementById("svgleft");
       //let svg = ""
       if (svg) {
         return "data:image/svg+xml;utf8," + svg.outerHTML;
@@ -531,7 +605,7 @@
         return false;
       }
       
-    }
+    },
   },
   methods: {
       ClearValues: function() {
@@ -541,17 +615,84 @@
           this.bl = "";
           this.sbrl = "";
           this.sfrl = "";
+          //type von rechter seite nehmen 
+          if(localStorage.lastselected == 1 || localStorage.lastselected == 3){
+              localStorage.lasttype = this.jointleft;
+          } else {
+              localStorage.lasttype = this.jointright;
+          }
+
+          localStorage.lastselected = this.selected;
+
+          if(localStorage.lasttype == "plug") {
+              this.jointleft = "hole"
+          } else {
+              this.jointleft = "plug"
+          } 
+
+          this.EndType();
+          //console.log(this.listNumber)
       },
       EndType: function() {
-          if(this.joint == "plug") {
+          if(this.jointleft == "plug") {
             this.hole = false;
             this.plug = true;
           }
-          else if (this.joint == "hole") {
+          else if (this.jointleft == "hole") {
             this.hole = true;
             this.plug = false;
           }
       },
-  }
+      addToList: function() {
+        if(!localStorage.list) {
+          localStorage.list = "[]";
+        }
+
+        /*let object = {
+            "left": document.querySelector('#svgleft').outerHTML,
+            "right": document.querySelector('#svgright').outerHTML,
+            }
+          localStorage.list.push(object)*/
+           let svgleft = document.getElementById("svgleft");
+           let svgright = document.getElementById("svgright");
+            //let svg = ""
+            let object = {
+            "left": "",
+            "right": "",
+            "length": 0
+            }
+
+            if (svgleft) {
+              object["left"] = svgleft.outerHTML;
+            }
+
+            if(svgright) {
+              object["right"] = svgright.outerHTML;
+            }
+            
+            let list = JSON.parse(localStorage.list)
+            list.push(object)
+            localStorage.list = JSON.stringify(list)
+      },
+      loadsvg: function(evt) {
+        console.lg(evt)
+        console.log(evt.target.outerHTML)
+      },
+      listNumber: function() {
+          if(localStorage.list) {
+            let list = JSON.parse(localStorage.list);
+            return list.length
+          } else {
+            return 1
+          }
+      },
+      viewCollection: function() {
+          if(localStorage.list) {
+            let list = JSON.parse(localStorage.list);
+            this.collection = list
+          }
+          this.mode = "view"
+      },
+  },
   }
 </script>

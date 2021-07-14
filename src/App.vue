@@ -28,17 +28,30 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
         text
+        @click="openAdd"
       >
-        <span class="mr-2">Latest Release</span>
+        <span class="mr-2">add</span>
         <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+      <v-btn
+        text
+        @click="openCollection"
+      >
+        <span class="mr-2">open Collection</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+      <v-btn
+        text
+        @click="clearCollection"
+      >
+        <span class="mr-2">clear Collection</span>
+        <v-icon>mdi-autorenew</v-icon>
       </v-btn>
     </v-app-bar>
 
     <v-main>
-      <Calculator/>
+      <Calculator ref="calculator"/>
     </v-main>
   </v-app>
 </template>
@@ -56,5 +69,19 @@ export default {
   data: () => ({
     //
   }),
+  methods: {
+    clearCollection: function() {
+         console.log("clear")
+         let list = [];
+         localStorage.list = JSON.stringify(list); 
+         this.$refs.calculator.collection = [];
+      },
+    openAdd: function() {
+      this.$refs.calculator.mode = "add"
+    },
+    openCollection: function() {
+      this.$refs.calculator.viewCollection();
+    }
+  }
 };
 </script>
