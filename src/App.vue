@@ -40,6 +40,7 @@
       >
         <span class="mr-2">open Collection</span>
         <v-icon>mdi-open-in-new</v-icon>
+        <span class="mr-2 red-text" style="color: #E53935;">{{collectioncount}}</span>
       </v-btn>
       <v-btn
         text
@@ -68,7 +69,13 @@ export default {
 
   data: () => ({
     //
+    list: [],
   }),
+  computed:{
+    collectioncount: function() {
+        return JSON.parse(localStorage.list).length
+    }
+  },
   methods: {
     clearCollection: function() {
          console.log("clear")
@@ -81,7 +88,13 @@ export default {
     },
     openCollection: function() {
       this.$refs.calculator.viewCollection();
+    },
+    refreshCollection: function () {
+      this.list = JSON.parse(localStorage.list)
     }
+  },
+  watch: {
+      
   }
 };
 </script>

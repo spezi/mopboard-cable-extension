@@ -315,6 +315,22 @@
                     y="48.300053"
                     style="font-size:4.58611px;fill:#ff0000;stroke-width:0.264583"
                     id="tspan1640">total length: {{length}} </tspan></text>
+                 <text
+                  xml:space="preserve"
+                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.58611px;line-height:1.25;font-family:Metropolis;-inkscape-font-specification:Metropolis;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+                  x="7.5821052"
+                  y="60.429482"
+                  id="text1614-3-7"><tspan
+                    sodipodi:role="line"
+                    x="7.5821052"
+                    y="60.429482"
+                    style="font-size:4.58611px;fill:#ff0000;stroke-width:0.264583"
+                    id="tspan1640-5">Input: </tspan><tspan
+                    sodipodi:role="line"
+                    x="7.5821052"
+                    y="66.162117"
+                    style="font-size:4.58611px;fill:#ff0000;stroke-width:0.264583"
+                    id="tspan1696">{{sfll}}{{sbll}} - {{fl}}{{bl}} - {{sfrl}}{{sbrl}} </tspan></text>
             </g>
           </svg>
 
@@ -409,6 +425,22 @@
                   y="48.300053"
                   style="font-size:4.58611px;fill:#ff0000;stroke-width:0.264583"
                   id="tspan1640">total length: {{length}} </tspan></text>
+               <text
+                  xml:space="preserve"
+                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.58611px;line-height:1.25;font-family:Metropolis;-inkscape-font-specification:Metropolis;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+                  x="7.5821052"
+                  y="60.429482"
+                  id="text1614-3-7"><tspan
+                    sodipodi:role="line"
+                    x="7.5821052"
+                    y="60.429482"
+                    style="font-size:4.58611px;fill:#ff0000;stroke-width:0.264583"
+                    id="tspan1640-5">Input: </tspan><tspan
+                    sodipodi:role="line"
+                    x="7.5821052"
+                    y="66.162117"
+                    style="font-size:4.58611px;fill:#ff0000;stroke-width:0.264583"
+                    id="tspan1696">{{sfbl}} - {{front}}{{back}} - {{sfbr}} </tspan></text>
             </g>
           </svg>
          
@@ -632,6 +664,7 @@
 
           this.EndType();
           //console.log(this.listNumber)
+          
       },
       EndType: function() {
           if(this.jointleft == "plug") {
@@ -659,7 +692,34 @@
             let object = {
             "left": "",
             "right": "",
-            "length": 0
+            "length": 0,
+            "leftinput": 0,
+            "maininput": 0,
+            "rightinput": 0,
+            }
+            
+            if(this.sfll) {
+                object["leftinput"] = this.sfll;
+            }
+
+            if(this.sbll) {
+                object["leftinput"] = this.sbll;
+            }
+
+            if(this.fl) {
+                object["maininput"] = this.fl;
+            }
+
+            if(this.bl) {
+                object["maininput"] = this.bl;
+            }
+
+            if(this.sfrl) {
+                object["rightinput"] = this.sfrl;
+            }
+
+            if(this.sbrl) {
+                object["rightinput"] = this.sbrl;
             }
 
             if (svgleft) {
@@ -683,7 +743,7 @@
             let list = JSON.parse(localStorage.list);
             return list.length
           } else {
-            return 1
+            return 0
           }
       },
       viewCollection: function() {
